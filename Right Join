@@ -1,0 +1,31 @@
+-- 1
+SELECT pilotos.nome, resultados_corrida.pontos
+FROM resultados_corrida RIGHT JOIN pilotos
+ON pilotos.id = resultados_corrida.piloto_id
+WHERE resultados_corrida.gp = 'GP de Interlagos';
+
+-- 2
+SELECT fabricantes_motor.nome, equipes.nome 
+FROM equipes RIGHT JOIN fabricantes_motor
+ON fabricantes_motor.id = equipes.motor_id;
+
+-- 3
+SELECT e.id, e.nome, e.motor_id
+FROM fabricantes_motor fm RIGHT JOIN equipes e ON fm.id = e.motor_id
+WHERE fm.id IS NULL;
+
+-- 4 a
+SELECT fm.nome AS fabricante, e.nome AS equipe, p.nome AS piloto
+FROM fabricantes_motor fm
+RIGHT JOIN equipes e ON fm.id = e.motor_id
+RIGHT JOIN pilotos p ON e.id = p.equipe_id;
+
+-- 4 b
+SELECT p.nome AS piloto, r.gp, r.pontos
+FROM resultados_corrida r RIGHT JOIN pilotos p ON r.piloto_id = p.id
+WHERE r.gp = 'GP de Interlagos';
+
+-- 4 c
+SELECT e.nome AS equipe
+FROM pilotos p RIGHT JOIN equipes e ON e.id = p.equipe_id
+WHERE p.id IS NULL;
